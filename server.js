@@ -179,9 +179,9 @@ app.post('/webhook', async (req, res) => {
     
 })
 
-app.listen(process.env.PORT || 1333, async () => {
+app.listen(process.env.PORT || 1333, () => {
     console.clear()
     console.log('🟡 bot is booting')
     console.log('🚀 starting bot...')
-    await init()
+    init()
 })
