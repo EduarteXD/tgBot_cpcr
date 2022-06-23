@@ -29,7 +29,8 @@ const init = async () => {
     }
     catch (err)
     {
-        console.warn(`🛑 fatal error: ${err}`)
+        console.clear()
+        console.warn(`🔴 fatal error: ${err}`)
         process.exit()
     }
     console.log('   setting up the webhook')
@@ -42,7 +43,8 @@ const init = async () => {
         }, 1000)
     }
     catch (err) {
-        console.warn(`🛑 fatal error: ${err.response.data.description}`)
+        console.clear()
+        console.warn(`🔴 fatal error: ${err.response.data.description}`)
         process.exit()
     }
 }
@@ -135,13 +137,13 @@ app.post('/webhook', async (req, res) => {
                     }
                     else
                     {
-                        const categories = ['中共同路人', '理中客', '键委', '魔怔壬']
+                        const categories = config.levels
                         sendMsg(
                             buddyID,
                             `你的最终分数为：${activeClients[buddyID].score}\n一眼丁真鉴定为: ${categories[parseInt(activeClients[buddyID].score / (activeClients[buddyID].progress * 3))]}`
                         )
                         console.log(`👮 ${buddyName}'s censor have been finished, end up with score ${activeClients[buddyID].score}`)
-                        if (activeClients[buddyID].score >= activeClients[buddyID].progress * 6)
+                        if (activeClients[buddyID].score >= activeClients[buddyID].progress * config.minScore)
                         {
                             let link = await createInviteLink()
                             if (link)
