@@ -174,6 +174,13 @@ app.post('/webhook', async (req, res) => {
                     }
                 }
             }
+            else
+            {
+                sendMsg(
+                    buddyID,
+                    config['default']
+                )
+            }
         }
     }
     
